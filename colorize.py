@@ -1,3 +1,4 @@
+#Get images
 import numpy as np
 from keras.models import Sequential
 from keras.layers import InputLayer,Conv2D,UpSampling2D
@@ -9,8 +10,8 @@ import cv2
 
 trainX=[]
 trainY=[]
-for filename in os.listdir('C:/Users/hvrsh/PycharmProjects/PROJECT_529_NEW/All images/Train/'):
-    image2=img_to_array(load_img('C:/Users/hvrsh/PycharmProjects/PROJECT_529_NEW/All images/Train/'+filename))
+for filename in os.listdir('C:/Users/hvrsh/PycharmProjects/PROJECT_529_NEW/All images/Dog/'):
+    image2=img_to_array(load_img('C:/Users/hvrsh/PycharmProjects/PROJECT_529_NEW/All images/Dog/'+filename))
     image=cv2.resize(image2,(256,256))
     image = np.array(image, dtype=float)
     # Import map images into the lab colorspace
@@ -62,7 +63,6 @@ model.save("model.h5")
 
 # Test model
 output = model.predict(color_me)
-print(output)
 output = output * 128
 
 # Output colorizations
@@ -70,4 +70,5 @@ for i in range(len(output)):
     cur = np.zeros((256, 256, 3))
     cur[:,:,0] = color_me[i][:,:,0]
     cur[:,:,1:] = output[i]
-    imsave("img_result.png", lab2rgb(cur))
+    imsave("img_result1.png", lab2rgb(cur))
+
